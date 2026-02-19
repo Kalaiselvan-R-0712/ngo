@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register | Stackly</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --primary:#ff6b35;
+    --dark:#0f172a;
+    --light:#ffffff;
+    --text:#1e293b;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:var(--dark);
+    color:white;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.auth-card{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.1);
+    padding:40px;
+    width:100%;
+    max-width:420px;
+    border-radius:20px;
+}
+
+.auth-card h2{
+    text-align:center;
+    margin-bottom:30px;
+    color:var(--primary);
+}
+
+.input-group{
+    margin-bottom:20px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:8px;
+    font-size:14px;
+}
+
+.input-group input{
+    width:100%;
+    padding:12px 15px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.2);
+    background:rgba(255,255,255,0.08);
+    color:white;
+    outline:none;
+}
+
+.input-group input:focus{
+    border-color:var(--primary);
+}
+
+.input-group input{
+    height:45px;
+}
+
+.password-wrapper{
+    position:relative;
+}
+
+.password-wrapper input{
+    padding-right:45px;
+}
+
+.password-wrapper span{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    font-size:18px;
+}
+
+.btn-primary{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:30px;
+    background:var(--primary);
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+}
+
+.auth-link{
+    text-align:center;
+    margin-top:15px;
+    font-size:14px;
+}
+
+.auth-link a{
+    color:var(--primary);
+    text-decoration:none;
+    font-weight:600;
+}
+
+.error{
+    color:#ff4d4d;
+    font-size:12px;
+    margin-top:5px;
+    display:none;
+}
+
+.auth-logo{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.auth-logo img{
+    height:55px;
+    transition:0.3s ease;
+}
+
+.auth-logo img:hover{
+    transform:scale(1.05);
+}
+
+/* =========================
+   Responsive Design
+========================= */
+
+/* Tablets */
+@media (max-width:768px){
+    .auth-card{
+        padding:30px;
+        max-width:90%;
+    }
+
+    .auth-card h2{
+        font-size:22px;
+    }
+
+    .btn-primary{
+        padding:11px;
+    }
+}
+
+/* Mobile */
+@media (max-width:480px){
+    body{
+        padding:15px;
+    }
+
+    .auth-card{
+        padding:25px 20px;
+        border-radius:15px;
+    }
+
+    .auth-card h2{
+        font-size:20px;
+        margin-bottom:20px;
+    }
+
+    .input-group label{
+        font-size:13px;
+    }
+
+    .input-group input{
+        height:42px;
+        font-size:14px;
+    }
+
+    .btn-primary{
+        padding:10px;
+        font-size:14px;
+    }
+
+    .auth-logo img{
+        height:45px;
+    }
+}
+
+/* Large Screens */
+@media (min-width:1200px){
+    .auth-card{
+        max-width:450px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="auth-card">
+<div class="auth-logo">
+    <a href="index.html">
+        <img src="assets/images/logo/stackly_logo.webp" alt="Stackly Logo">
+    </a>
+</div>
+    
+<h2>Create Account</h2>
+
+<form id="registerForm">
+
+<div class="input-group">
+<label>Email</label>
+<input type="email" id="email">
+<p id="emailError" class="error">Invalid email</p>
+</div>
+
+<div class="input-group">
+<label>Password</label>
+<div class="password-wrapper">
+<input type="password" id="password">
+<span id="togglePass1">👁</span>
+</div>
+<p id="passError" class="error">
+8+ chars with upper, lower, number & special char
+</p>
+</div>
+
+<div class="input-group">
+<label>Confirm Password</label>
+<div class="password-wrapper">
+<input type="password" id="confirmPassword">
+<span id="togglePass2">👁</span>
+</div>
+<p id="confirmError" class="error">Passwords do not match</p>
+</div>
+
+<button type="submit" class="btn-primary">Register</button>
+
+<div class="auth-link">
+Already have an account?
+<a href="login.html">Login</a>
+</div>
+
+</form>
+</div>
+
+<script>
+const emailError = document.getElementById("emailError");
+const passError = document.getElementById("passError");
+const confirmError = document.getElementById("confirmError");
+    
+const email=document.getElementById("email");
+const password=document.getElementById("password");
+const confirmPassword=document.getElementById("confirmPassword");
+
+document.getElementById("togglePass1").onclick=()=>{
+password.type=password.type==="password"?"text":"password";
+};
+
+document.getElementById("togglePass2").onclick=()=>{
+confirmPassword.type=confirmPassword.type==="password"?"text":"password";
+};
+
+const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const passPattern=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+document.getElementById("registerForm").addEventListener("submit",(e)=>{
+e.preventDefault();
+let valid=true;
+
+if(!emailPattern.test(email.value)){
+emailError.style.display="block";
+valid=false;
+}else emailError.style.display="none";
+
+if(!passPattern.test(password.value)){
+passError.style.display="block";
+valid=false;
+}else passError.style.display="none";
+
+if(password.value!==confirmPassword.value){
+confirmError.style.display="block";
+valid=false;
+}else confirmError.style.display="none";
+
+if(valid){
+window.location.href="404.html";
+}
+
+});
+</script>
+
+</body>
+</html>
