@@ -199,6 +199,15 @@ body{
     border-radius:30px;
     text-decoration:none;
     color:white;
+    display:inline-block;
+    transition:all 0.35s ease;
+}
+
+.btn-outline:hover{
+    background:white;
+    color:var(--primary);
+    transform:translateY(-5px);
+    box-shadow:0 15px 30px rgba(0,0,0,0.25);
 }
 
 .donor-info{
@@ -2637,6 +2646,28 @@ html, body{
     .pricing-grid{
         grid-template-columns:1fr;
     }
+}
+
+/* ===== DESKTOP NAV ALIGNMENT FIX ===== */
+@media (min-width: 993px){
+
+    .nav ul{
+        display:flex;
+        align-items:center;   /* vertically center */
+        height:100%;
+    }
+
+    .nav ul li{
+        display:flex;
+        align-items:center;   /* force vertical center */
+    }
+
+    .nav ul li a{
+        display:flex;
+        align-items:center;   /* perfect text centering */
+        height:100%;
+    }
+
 }
 
 </style>
